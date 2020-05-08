@@ -1,0 +1,15 @@
+title 0.6: SPA - Single-Page Application Version (new note)
+
+note over browser:
+Creating a new note results
+in the additional following request
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over browser:
+the payload that is send is for example:
+{"content":"SHOW ME THE MONEY!","date":"2020-05-08T18:20:33.761Z"}
+end note
+
+server-->browser: HTTP Status Code 201 - Created

@@ -1,0 +1,19 @@
+title 0.5: SPA - Single-Page Application Version
+
+browser->server: HTTP get https://fullstack-exampleapp.herokuapp.com/spa
+server-->browser: HTTP Status Code 200 - OK | HTML code
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: HTTP Status Code 200 - OK | CSS - main.cs
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js
+server-->browser: HTTP Status Code 200 - OK | JavaScript - spa.js
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server
+as soon as the spa.js is loaded
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: HTTP Status Code 200 - OK | [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/favicon.ico
+server-->browser: HTTP Status Code 404 - Not Found
