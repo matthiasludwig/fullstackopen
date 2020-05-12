@@ -8,6 +8,27 @@ function Button(props) {
   )
 }
 
+function Statistics({sentiment}) {
+  return (
+    <div>
+    <h1>statistics</h1>
+    <p>good {sentiment.good}</p>
+    <p>neutral {sentiment.neutral}</p>
+    <p>bad {sentiment.bad}</p>
+  </div>
+  )
+}
+
+function Buttons({sentiment, handleClick}) {
+  const sentimentArray = Object.keys(sentiment);
+  return (
+    <>
+    <h1>give feedback</h1>
+    {sentimentArray.map((sentiment, index) => <Button key={index} handleClick={() => handleClick(sentiment)} text={sentiment} />)}
+    </>
+  )
+}
+
 const App = () => {
   const [sentiment, setSentiment] = useState({good: 0, neutral: 0, bad: 0});
 
@@ -18,14 +39,8 @@ const App = () => {
 
   return (
     <div>
-      <h1>give feedback</h1>
-        <Button handleClick={() => handleClick('good')} text={'good'} />
-        <Button handleClick={() => handleClick('neutral')} text={'neutral'} />
-        <Button handleClick={() => handleClick('bad')} text={'bad'} />
-      <h1>statistics</h1>
-        <p>good {sentiment.good}</p>
-        <p>neutral {sentiment.neutral}</p>
-        <p>bad {sentiment.bad}</p>
+      <Buttons sentiment={sentiment} handleClick={handleClick} />
+      <Statistics sentiment={sentiment}/>
     </div>
   )
 }
