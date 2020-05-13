@@ -7,11 +7,33 @@ function Button({handleClick, text}) {
   )
 }
 
+function Random({selectedAnecdote, votes}) {
+  return (
+    <>
+      <h1>Anecdote of the day</h1>
+      <p>{selectedAnecdote}<br/>
+      has {votes} votes
+      </p>
+    </>
+  )
+}
+
+function Rated({highestRated}) {
+  return (
+    <>
+      <h1>Anecdote with most votes</h1>
+      <p>{highestRated}</p>
+    </>
+  )
+}
+
 const App = (props) => {
   const range = props.anecdotes.length;  // To use to generate random number and fill points Array
 
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(new Array(range).fill(0));
+
+  const maxIndex = points.indexOf(Math.max(...points));
 
   const changePoints = (index) => {
     const copyPoints = [...points];
@@ -21,12 +43,10 @@ const App = (props) => {
 
   return (
     <div>
-      {props.anecdotes[selected]}
-      <br />
-      has {points[selected]} votes
-      <br />
+      <Random votes={points[selected]} selectedAnecdote={props.anecdotes[selected]} />
       <Button handleClick={() => changePoints(selected)} text={"vote"}/>
       <Button handleClick={() => setSelected(Math.floor(Math.random() * range))} text={"next anecdote"}/>
+      <Rated highestRated={props.anecdotes[maxIndex]} />
     </div>
   )
 }
