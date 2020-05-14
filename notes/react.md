@@ -25,3 +25,8 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
+## Functional Programming
+
+* Higher Order Function (Callback Function)
+* Examples: `.map()`, `filter()`, `reduce()`
