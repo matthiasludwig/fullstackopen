@@ -7,7 +7,6 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
 
   const handleNameChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   }
 
@@ -16,8 +15,13 @@ const App = () => {
     const newPerson = {
       name: newName
     }
-    setPersons(persons.concat(newPerson));
-    setNewName('');
+    if (persons.some(person => person.name === newPerson.name)) {
+      alert(`${newPerson.name} is already added to the phonebook`); // sonarlint complains but the task requires an alert() function
+    }
+    else {
+      setPersons(persons.concat(newPerson));
+      setNewName('');
+    }
   }
 
   return (
