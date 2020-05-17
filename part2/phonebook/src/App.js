@@ -19,7 +19,7 @@ const App = () => {
         console.log(response.data);
         setPersons(response.data);
       })
-  })
+  }, []);
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
