@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SearchResults from './components/SearchResults';
 
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [searchTerm, setSearchTerm] = useState(' ');
-  const [displayCountries, setDisplayCountries] = useState([])
 
   useEffect(() => {
     console.log("Getting data from restcountries.eu");
@@ -16,29 +16,12 @@ function App() {
 
   function setSearch(event) {
     setSearchTerm(event.target.value);
-    countriesToShow();
   }
-
-  const countriesToShow = () => {
-    let filteredCountries = countries.filter(country => country.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    console.log(filteredCountries.length);
-    if (filteredCountries.length > 10) {
-      const messageOverTen = [{name: 'Too many matches, please specify another filter'}];
-      setDisplayCountries(messageOverTen)
-    }
-    else if (filteredCountries.length > 1) {
-      setDisplayCountries(filteredCountries);
-    }
-    else {
-      setDisplayCountries([{name: 'I should be the one!'}]);
-    }
-  }
-
 
   return (
     <>
     find countries: <input onChange={setSearch} value={searchTerm}></input>
-    {displayCountries.map((country, idx) => <p key={idx}>{country.name}</p>)}
+    <SearchResults countries={countries} searchTerm={searchTerm}/>
     </>
   );
 }
