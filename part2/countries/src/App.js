@@ -8,7 +8,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState(' ');
 
   useEffect(() => {
-    console.log("Getting data from restcountries.eu");
+    //console.log("Getting data from restcountries.eu");
     axios
       .get("https://restcountries.eu/rest/v2/all?fields=name;capital;numericCode;population;flag;languages")
       .then(response => setCountries(response.data));
