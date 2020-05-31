@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SearchResults from './components/SearchResults';
+import Display from './components/Display';
 
 
 function App() {
   const [countries, setCountries] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(' ');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     //console.log("Getting data from restcountries.eu");
@@ -21,7 +21,7 @@ function App() {
   return (
     <>
     find countries: <input onChange={setSearch} value={searchTerm}></input>
-    <SearchResults countries={countries} searchTerm={searchTerm}/>
+    <Display countries={countries} searchTerm={searchTerm}/>
     </>
   );
 }
