@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Country = ({ countryInformation }) => {
-    const [weather, setWeather] = useState({});
+    const [weather, setWeather] = useState({});  // Not sure if child components should have a state or if App.js should have the state and pass down to Country.js
 
     const apiKey = `access_key=${process.env.REACT_APP_API_KEY}`;
     const weatherUrl = "http://api.weatherstack.com/current?";
