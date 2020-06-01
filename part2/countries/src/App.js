@@ -18,10 +18,14 @@ function App() {
     setSearchTerm(event.target.value);
   }
 
+  function setShowClick(countryName) {
+    setSearchTerm(countryName)
+  }
+
   return (
     <>
     find countries: <input onChange={setSearch} value={searchTerm}></input>
-    <Display countries={countries} searchTerm={searchTerm}/>
+    <Display countries={countries} searchTerm={searchTerm} setShowClick={setShowClick}/>
     </>
   );
 }

@@ -11,7 +11,7 @@ const Country = ({ countryInformation }) => {
             <h3>languages</h3>
             <div>
                 <ul>
-                    {countryInformation.languages.map(language => <li key={language}>{language.name}</li> )}
+                    {countryInformation.languages.map(language => <li key={language.iso639_2}>{language.name}</li> )}
                 </ul>
             </div>
             <img src={countryInformation.flag} alt={countryInformation.name} width='200px'/>
