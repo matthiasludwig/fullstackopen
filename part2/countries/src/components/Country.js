@@ -5,7 +5,7 @@ const Country = ({ countryInformation }) => {
     const [weather, setWeather] = useState({});  // Not sure if child components should have a state or if App.js should have the state and pass down to Country.js
 
     const apiKey = `access_key=${process.env.REACT_APP_API_KEY}`;
-    const weatherUrl = "http://api.weatherstack.com/current?";
+    const weatherUrl = "http://api.weatherstack.com/current?";  // Unfortunatly weatherstack only supports http instead of https for free
     let capital = `query=${countryInformation.capital}`;
 
     useEffect(() => {
