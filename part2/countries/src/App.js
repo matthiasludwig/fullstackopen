@@ -10,7 +10,7 @@ function App() {
 
   // useEffect is used to gather data from the REST API
   useEffect(() => {
-    //console.log("Getting data from restcountries.eu");
+    // console.log("Getting data from restcountries.eu");
     axios
       .get("https://restcountries.eu/rest/v2/all?fields=name;capital;numericCode;population;flag;languages")  // Only requesting the fields that we need later
       .then(response => setCountries(response.data));
