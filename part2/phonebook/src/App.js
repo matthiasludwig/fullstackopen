@@ -7,8 +7,8 @@ import Persons from './components/Persons';
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
   const [ newName, setNewName ] = useState('');
-  const [newNumber, setNewNumber] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [ newNumber, setNewNumber ] = useState('');
+  const [ searchTerm, setSearchTerm ] = useState('');
 
   useEffect(() => {
     console.log("effecting!");
@@ -16,7 +16,7 @@ const App = () => {
     axios
       .get("http://localhost:3001/persons")
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setPersons(response.data);
       })
   }, []);
