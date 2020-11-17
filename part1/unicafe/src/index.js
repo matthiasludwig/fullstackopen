@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Button(props) {
+function Button({handleClick, text}) {
   return (
-    <button onClick={props.handleClick}>{props.text}</button>
+    <button onClick={handleClick}>{text}</button>
   )
 }
 
