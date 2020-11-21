@@ -55,7 +55,7 @@ function Buttons({sentiment, handleClick}) {
   return (
     <>
     <h1>give feedback</h1>
-    {sentimentArray.map((sentiment, index) => <Button key={index} handleClick={() => handleClick(sentiment)} text={sentiment} />)}
+    {sentimentArray.map((val, index) => <Button key={index} handleClick={() => handleClick(val)} text={val} />)}
     </>
   )
 }
