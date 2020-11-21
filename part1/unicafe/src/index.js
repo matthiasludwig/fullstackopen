@@ -33,7 +33,7 @@ function Statistics({sentiment}) {
             <Statistic text={'bad'} value={sentiment.bad} />
             <Statistic text={'all'} value={total} />
             <Statistic text={'average'} value={average} />
-            <Statistic text={'positive'} value={positive} />
+            <Statistic text={'positive'} value={`${positive} %`} />
           </tbody>
         </table>
       </div>
