@@ -18,11 +18,12 @@ function Random({selectedAnecdote, votes}) {
   )
 }
 
-function Rated({highestRated}) {
+function Rated({highestRated, voteNumbers}) {
   return (
     <>
       <h1>Anecdote with most votes</h1>
-      <p>{highestRated}</p>
+      <p>{highestRated} <br/>
+      has {voteNumbers} votes</p>
     </>
   )
 }
@@ -33,10 +34,10 @@ const App = (props) => {
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(new Array(range).fill(0));
 
-  const maxIndex = points.indexOf(Math.max(...points));
+  const maxIndex = points.indexOf(Math.max(...points));  // The index of the most voted option
 
   const changePoints = (index) => {
-    const copyPoints = [...points];
+    const copyPoints = points.slice();
     copyPoints[index] += 1;
     setPoints(copyPoints);
   }
@@ -46,7 +47,7 @@ const App = (props) => {
       <Random votes={points[selected]} selectedAnecdote={props.anecdotes[selected]} />
       <Button handleClick={() => changePoints(selected)} text={"vote"}/>
       <Button handleClick={() => setSelected(Math.floor(Math.random() * range))} text={"next anecdote"}/>
-      <Rated highestRated={props.anecdotes[maxIndex]} />
+      <Rated highestRated={props.anecdotes[maxIndex]} voteNumbers={points[maxIndex]} />
     </div>
   )
 }
