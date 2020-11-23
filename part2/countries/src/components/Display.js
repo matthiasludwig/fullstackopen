@@ -12,7 +12,6 @@ const Display = ({ countries, searchTerm, setShowClick }) => {
     else if (searchResults.length < 10) {
        return <SearchResults searchResults={searchResults} setShowClick={setShowClick}/>;  // If the results are less than 10, show the list of countries
     }
-    
     else {
         return <Message text="Too many matches, specify another filter"/>  // Else show a message to specify the filter better
     }

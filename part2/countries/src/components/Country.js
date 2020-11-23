@@ -14,7 +14,7 @@ const Country = ({ countryInformation }) => {
             .then(response => setWeather(response.data['current']))
     }, [apiKey, capital]);
 
-    console.log(weather);
+    // console.log(weather);  // Used for debugging
 
     return (
         <>
