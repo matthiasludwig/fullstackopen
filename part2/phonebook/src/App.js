@@ -11,7 +11,7 @@ const App = () => {
   const [ searchTerm, setSearchTerm ] = useState('');
 
   useEffect(() => {
-    console.log("effecting!");
+    // console.log("effecting!");  // Debug
 
     axios
       .get("http://localhost:3001/persons")
@@ -21,6 +21,7 @@ const App = () => {
       })
   }, []);
 
+  // Controlle Components
   const handleNameChange = (event) => {
     setNewName(event.target.value);
   }
