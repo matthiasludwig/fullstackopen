@@ -44,9 +44,13 @@ const App = () => {
       alert(`${newPerson.name} is already added to the phonebook`); // sonarlint complains but the task requires an alert() function
     }
     else {
-      setPersons(persons.concat(newPerson));
-      setNewName('');
-      setNewNumber('')
+      axios
+        .post("http://localhost:3001/persons", newPerson)
+        .then((response) => {
+          setPersons(persons.concat(newPerson));
+          setNewName('');
+          setNewNumber('');
+        });
     }
   }
 

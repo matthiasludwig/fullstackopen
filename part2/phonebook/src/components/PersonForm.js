@@ -1,15 +1,15 @@
 import React from 'react';
 
-const PersonFrom = (props) => {
+const PersonFrom = ({handleSubmit, handleNameChange, handleNumberChange, newName, newNumber}) => {
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
-        name: <input onChange={props.handleNameChange} value={props.newName} />
+        name: <input onChange={handleNameChange} value={newName} />
         <br/>
-        number: <input onChange={props.handleNumberChange} value={props.newNumber} />
+        number: <input onChange={handleNumberChange} value={newNumber} />
       </div>
       <div>
-        <button onClick={props.handleSubmit} type="submit">add</button>
+        <button type="submit">add</button>
       </div>
   </form>
   )
