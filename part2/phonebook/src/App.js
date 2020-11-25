@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
+import personService from './services/persons';
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -12,28 +12,21 @@ const App = () => {
 
   useEffect(() => {
     // console.log("effecting!");  // Debug
-
-    axios
-      .get("http://localhost:3001/persons")
-      .then(response => {
-        // console.log(response.data);
-        setPersons(response.data);
-      })
+    personService.getPersons().then(response => setPersons(response.data));
   }, []);
 
-  // Controlle Components
+  // Controlled Components
   const handleNameChange = (event) => {
     setNewName(event.target.value);
   }
-
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
   }
-
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
   }
 
+  // Event handler
   const handleSubmit = (e) => {
     e.preventDefault()
     const newPerson = {
@@ -44,13 +37,9 @@ const App = () => {
       alert(`${newPerson.name} is already added to the phonebook`); // sonarlint complains but the task requires an alert() function
     }
     else {
-      axios
-        .post("http://localhost:3001/persons", newPerson)
-        .then((response) => {
-          setPersons(persons.concat(newPerson));
-          setNewName('');
-          setNewNumber('');
-        });
+      personService
+        .postPerson(newPerson)
+        .then(response => setPersons(persons.concat(response.data)));
     }
   }
 
