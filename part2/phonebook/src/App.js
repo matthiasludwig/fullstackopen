@@ -34,7 +34,15 @@ const App = () => {
       number: newNumber
     }
     if (persons.some(person => person.name === newPerson.name)) {
-      alert(`${newPerson.name} is already added to the phonebook`); // sonarlint complains but the task requires an alert() function
+      const userChoice = window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`);
+
+      if (userChoice) {
+        const currentPerson = persons.find(obj => obj.name === newPerson.name);
+        personService.updatePerson(currentPerson.id, newPerson)
+          .then((response) => {
+            setPersons(persons.map(person => person.id !== currentPerson.id ? person : response.data))
+          });
+      }
     }
     else {
       personService
