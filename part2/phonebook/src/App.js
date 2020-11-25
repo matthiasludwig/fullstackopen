@@ -39,7 +39,19 @@ const App = () => {
     else {
       personService
         .postPerson(newPerson)
-        .then(response => setPersons(persons.concat(response.data)));
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+          setNewName('');
+          setNewNumber('');
+        });
+    }
+  }
+  const handleDelete = (id, name) => {
+    const userChoice = window.confirm(`Delete ${name}?`);
+
+    if (userChoice) {
+      personService.deletePerson(id)
+      .then(response => setPersons(persons.filter(obj => (obj.id !== id))));
     }
   }
 
@@ -49,14 +61,18 @@ const App = () => {
       <Filter handleSearchChange={handleSearchChange}/>
       <h3>add a new</h3>
       <PersonForm
-        handleSubmit={handleSubmit}
         handleNameChange={handleNameChange}
         handleNumberChange={handleNumberChange}
         newName={newName}
         newNumber={newNumber}
+        handleSubmit={handleSubmit}
         />
       <h3>Numbers</h3>
-        <Persons persons={persons} searchTerm={searchTerm}/>
+        <Persons
+          persons={persons}
+          searchTerm={searchTerm}
+          handleDelete={handleDelete}
+          />
     </div>
   )
 }

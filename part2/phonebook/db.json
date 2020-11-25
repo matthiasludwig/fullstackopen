@@ -19,31 +19,6 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
-    },
-    {
-      "name": "Test user",
-      "number": "123-456-78910",
-      "id": 5
-    },
-    {
-      "name": "Test user 2",
-      "number": "234-5678-9876",
-      "id": 6
-    },
-    {
-      "name": "Michael",
-      "number": "111-222-3333",
-      "id": 7
-    },
-    {
-      "name": "Test Person",
-      "number": "111-222-3333",
-      "id": 8
-    },
-    {
-      "name": "Test Person2",
-      "number": "222-333-4444",
-      "id": 9
     }
   ]
 }
