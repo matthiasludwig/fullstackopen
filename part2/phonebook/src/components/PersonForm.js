@@ -4,10 +4,10 @@ const PersonFrom = ({handleSubmit, handleNameChange, handleNumberChange, newName
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label for="name">name:</label>
+        <label htmlFor="name">name:</label>
         <input onChange={handleNameChange} value={newName} name="name" />
         <br/>
-        <label for="number">number</label>
+        <label htmlFor="number">number</label>
         <input onChange={handleNumberChange} value={newNumber} name="number" />
       </div>
       <div>
