@@ -33,7 +33,7 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    if (persons.some(person => person.name === newPerson.name)) {
+    if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLocaleLowerCase())) {  // Included '.toLowerCase()' to person.name and newPerson.name to also match lower case matches
       const userChoice = window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`);
 
       if (userChoice) {
