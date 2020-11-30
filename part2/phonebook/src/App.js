@@ -4,7 +4,7 @@ import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 import Notification from './components/Notification';
 import personService from './services/persons';
-import './index.css';
+//import './index.css'; // Alternative solution with centralized stylesheet
 
 const App = () => {
   const [ persons, setPersons ] = useState([]) 
@@ -56,7 +56,7 @@ const App = () => {
           setNewNumber('');
           setMessage({
             text: `Added ${newPerson.name}`,
-            id: 'info'
+            id: 'green'
           })
           setTimeout(() => setMessage(null), 5000);
         });
@@ -71,7 +71,7 @@ const App = () => {
       .catch(error => {
         setMessage({
           text: `Information of ${name} has already been removed from server`,
-          id: 'error'
+          id: 'red'
         })
         setTimeout(() => setMessage(null), 5000);
         setPersons(persons.filter(obj => (obj.id !== id)));
