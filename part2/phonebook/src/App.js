@@ -44,6 +44,21 @@ const App = () => {
         personService.updatePerson(currentPerson.id, newPerson)
           .then((response) => {
             setPersons(persons.map(person => person.id !== currentPerson.id ? person : response.data));
+            setNewName('');
+            setNewNumber('');
+            setMessage({
+              text: `Added ${response.name}`,
+              id: 'green'
+            })
+            setTimeout(() => setMessage(null, 5000));
+          })
+          .catch(error => {
+            setMessage({
+              text: `Information of ${currentPerson.name} has already been removed from server`,
+              id: 'red'
+            })
+            setTimeout(() => setMessage(null), 5000);
+            setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));
           });
       }
     }
