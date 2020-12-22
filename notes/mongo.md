@@ -259,3 +259,7 @@ db.posts.find({ views: { $lte: 7 } })
 ![expr on mongodb](./images/expr.png)
 
 ![projection on mongodb](./images/projection.png)
+
+![aggregation on mongodb](./images/aggregation.png)
+
+![$group on mongodb](./images/group.png)
