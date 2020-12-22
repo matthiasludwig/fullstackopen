@@ -49,7 +49,6 @@ const App = () => {
       id: 'red'
     })
     setTimeout(() => setMessage(null), 5000);
-    
   }
 
   // Create and Update
@@ -73,7 +72,7 @@ const App = () => {
           })
           .catch(error => {
             errorHandling(error.response.data.error, currentPerson.name);
-            setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));
+            // setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));  Disabled since Validators should not lead to deletion of elements in the frontend
           })
         }
     }
