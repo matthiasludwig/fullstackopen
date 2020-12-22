@@ -43,9 +43,9 @@ const App = () => {
   }
 
   const errorHandling = (error, name) => {
-    console.log(name);
+    console.log(error);
     setMessage({
-      text: `Information of ${name} has already been removed from server`,
+      text: error,
       id: 'red'
     })
     setTimeout(() => setMessage(null), 5000);
@@ -65,19 +65,19 @@ const App = () => {
 
       if (userChoice) {
         const currentPerson = persons.find(obj => obj.name === newPerson.name);
-        personService.updatePerson(currentPerson.id, newPerson)
+        personService
+          .updatePerson(currentPerson.id, newPerson)
           .then((response) => {
             setPersons(persons.map(person => person.id !== currentPerson.id ? person : response.data));
             cleanUpTasks(response.name);
           })
           .catch(error => {
-            errorHandling(error, currentPerson.name);
+            errorHandling(error.response.data.error, currentPerson.name);
             setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));
           })
         }
     }
     else {
-      console.log("Creating new Person!");
       personService
         .postPerson(newPerson)
         .then((response) => {
@@ -85,7 +85,7 @@ const App = () => {
           cleanUpTasks(newPerson.name);
         })
         .catch(error => {
-          errorHandling(error, newPerson.name)
+          errorHandling(error.response.data.error, newPerson.name)
         })
       }
   }
@@ -98,7 +98,7 @@ const App = () => {
       personService.deletePerson(id)
       .then(response => setPersons(persons.filter(obj => (obj.id !== id))))
       .catch(error => {
-        errorHandling(error, name);
+        errorHandling(error.response.data.error, name);
       })
     }
   }
