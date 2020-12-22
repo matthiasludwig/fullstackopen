@@ -13,6 +13,8 @@ const App = () => {
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ message, setMessage ] = useState(null);
 
+
+  // Getting Initial persons array
   useEffect(() => {
     // console.log("effecting!");  // Debug
     personService.getPersons().then(response => setPersons(response.data));
@@ -29,14 +31,36 @@ const App = () => {
     setSearchTerm(event.target.value.toLowerCase());
   }
 
-  // Event handler
+  // Helper Functions
+  const cleanUpTasks = (name) => {
+    setNewName('');
+    setNewNumber('');
+    setMessage({
+      text: `Added ${name}`,
+      id: 'green'
+    })
+    setTimeout(() => setMessage(null, 5000));
+  }
+
+  const errorHandling = (error, name) => {
+    console.log(name);
+    setMessage({
+      text: `Information of ${name} has already been removed from server`,
+      id: 'red'
+    })
+    setTimeout(() => setMessage(null), 5000);
+    
+  }
+
+  // Create and Update
   const handleSubmit = (e) => {
     e.preventDefault()
     const newPerson = {
       name: newName,
       number: newNumber
     }
-    if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLocaleLowerCase())) {  // Included '.toLowerCase()' to person.name and newPerson.name to also match lower case matches
+    // Included '.toLowerCase()' to person.name and newPerson.name to also match lower case matches
+    if (persons.some(person => person.name.toLowerCase() === newPerson.name.toLocaleLowerCase())) {
       const userChoice = window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`);
 
       if (userChoice) {
@@ -44,39 +68,29 @@ const App = () => {
         personService.updatePerson(currentPerson.id, newPerson)
           .then((response) => {
             setPersons(persons.map(person => person.id !== currentPerson.id ? person : response.data));
-            setNewName('');
-            setNewNumber('');
-            setMessage({
-              text: `Added ${response.name}`,
-              id: 'green'
-            })
-            setTimeout(() => setMessage(null, 5000));
+            cleanUpTasks(response.name);
           })
           .catch(error => {
-            setMessage({
-              text: `Information of ${currentPerson.name} has already been removed from server`,
-              id: 'red'
-            })
-            setTimeout(() => setMessage(null), 5000);
+            errorHandling(error, currentPerson.name);
             setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));
-          });
-      }
+          })
+        }
     }
     else {
+      console.log("Creating new Person!");
       personService
         .postPerson(newPerson)
         .then((response) => {
           setPersons(persons.concat(response.data));
-          setNewName('');
-          setNewNumber('');
-          setMessage({
-            text: `Added ${newPerson.name}`,
-            id: 'green'
-          })
-          setTimeout(() => setMessage(null), 5000);
-        });
-    }
+          cleanUpTasks(newPerson.name);
+        })
+        .catch(error => {
+          errorHandling(error, newPerson.name)
+        })
+      }
   }
+
+  // Deletion
   const handleDelete = (id, name) => {
     const userChoice = window.confirm(`Delete ${name}?`);
 
@@ -84,13 +98,8 @@ const App = () => {
       personService.deletePerson(id)
       .then(response => setPersons(persons.filter(obj => (obj.id !== id))))
       .catch(error => {
-        setMessage({
-          text: `Information of ${name} has already been removed from server`,
-          id: 'red'
-        })
-        setTimeout(() => setMessage(null), 5000);
-        setPersons(persons.filter(obj => (obj.id !== id)));
-      });
+        errorHandling(error, name);
+      })
     }
   }
 

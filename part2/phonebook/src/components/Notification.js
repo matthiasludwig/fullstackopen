@@ -7,8 +7,6 @@ const Notification = ({ message }) => {
     }
 
     else {
-        console.log(message.id);
-
         let messageStyle = {
             color: message.id,
             backgroundColor: 'lightgray',
