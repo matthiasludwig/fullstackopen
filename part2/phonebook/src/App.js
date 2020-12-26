@@ -72,7 +72,8 @@ const App = () => {
           })
           .catch(error => {
             errorHandling(error.response.data.error, currentPerson.name);
-            // setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));  Disabled since Validators should not lead to deletion of elements in the frontend
+            // setPersons(persons.filter(obj => (obj.id !== currentPerson.id)));  Disabled since failed validators should not lead to deletion of elements in the frontend
+            personService.getPersons().then(response => setPersons(response.data));  // Since an error occured get the correct list from the backend again
           })
         }
     }
@@ -98,6 +99,7 @@ const App = () => {
       .then(response => setPersons(persons.filter(obj => (obj.id !== id))))
       .catch(error => {
         errorHandling(error.response.data.error, name);
+        personService.getPersons().then(response => setPersons(response.data));  // Check the status of the db with the backend since an error occured
       })
     }
   }
