@@ -86,7 +86,7 @@ describe("totalLikes calculates", () => {
     })
 
     test("calculates array of one (with 7 likes) correctly", () => {
-        const result = listHelper.totalLikes([blogs[1]])
+        const result = listHelper.totalLikes([blogs[0]])
 
         expect(result).toBe(7)
     })
