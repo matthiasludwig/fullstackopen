@@ -60,7 +60,7 @@ const blogs = [
     {
         _id: "5a422bc61b54a676234d17fc",
         title: "Solid Relevance",
-        author: "Robert C. Martin",
+        author: "Michael Chan",
         url: "http://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html",
         likes: 12,
         __v: 0
@@ -136,4 +136,43 @@ describe("favoriteBlog calculates", () => {
 
         expect(result).toEqual(targetFavorite)
     })
+})
+
+describe("mostBlogs calculates", () => {
+    const mostBlogAuthor = {
+        author: "Robert C. Martin",
+        blogs: 3
+    }
+
+    test("zero input", () => {
+        const result = listHelper.mostBlogs([])
+
+        expect(result).toBe("Error: Blogs array is empty")
+    })
+
+    test("calculates author with most blogs", () => {
+        const result = listHelper.mostBlogs(blogs)
+
+        expect(result).toEqual(mostBlogAuthor)
+    })
+})
+
+describe("mostLikes calculates", () => {
+    const mostLikedAuthor = {
+        author: "Michael Chan",
+        likes: 19
+    }
+
+    test("zero input", () => {
+        const result = listHelper.mostLikes([])
+
+        expect(result).toBe("Error: Blogs array is empty")
+    })
+
+    test("calculates author with most likes", () => {
+        const result = listHelper.mostLikes(blogs)
+
+        expect(result).toEqual(mostLikedAuthor)
+    })
+
 })
